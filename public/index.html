@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-on-1 Chat App</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div id="loginPage" class="page">
+        <h2>Welcome to 1-on-1 Chat</h2>
+        <input type="text" id="nickname" placeholder="Enter your nickname">
+        
+        <div>
+            <label>Gender:</label>
+            <select id="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Interests (comma separated):</label>
+            <input type="text" id="interests" placeholder="e.g., gaming, music, movies">
+        </div>
+
+        <button id="startBtn">Start Chatting</button>
+    </div>
+
+    <div id="chatPage" class="page" style="display:none;">
+        <div id="status">Connecting...</div>
+        <div id="chatBox"></div>
+        <input type="text" id="messageInput" placeholder="Type your message...">
+        <button id="sendBtn">Send</button>
+        <button id="skipBtn">Skip</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
