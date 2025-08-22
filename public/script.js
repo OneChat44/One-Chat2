@@ -19,13 +19,16 @@ let gender = '';
 let interests = '';
 
 startBtn.addEventListener('click', () => {
+    console.log('Start button clicked'); // debug
     nickname = nicknameInput.value.trim() || 'Guest';
     gender = genderSelect.value;
     interests = interestsInput.value.trim();
+
     loginPage.style.display = 'none';
     chatPage.style.display = 'block';
     statusDiv.textContent = 'Looking for a chat partner...';
-    socket.emit('login', nickname);
+
+    socket.emit('login', { nickname, gender, interests });
 });
 
 socket.on('chatStart', (partnerNickname) => {
@@ -43,7 +46,8 @@ socket.on('partnerLeft', () => {
 
 sendBtn.addEventListener('click', () => {
     const message = messageInput.value.trim();
-    if (message === '') return;
+    if (!message) return;
+
     appendMessage(You: ${message});
     socket.emit('message', message);
     messageInput.value = '';
