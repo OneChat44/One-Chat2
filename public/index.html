@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OneChat</title>
-<link rel="stylesheet" href="style.css">
-<script src="/socket.io/socket.io.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneChat</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f2f2f2; }
+        #loginPage, #chatPage { display: none; padding: 20px; }
+        #loginPage { display: block; }
+        #chatBox { border: 1px solid #ccc; height: 300px; overflow-y: scroll; background: #fff; padding: 10px; margin-bottom: 10px; }
+        input, select, button { padding: 10px; margin: 5px 0; width: 100%; max-width: 300px; }
+        #status { margin-bottom: 10px; font-weight: bold; }
+    </style>
 </head>
 <body>
-<div id="loginPage" class="page">
-    <h1>OneChat</h1>
-    <input type="text" id="nickname" placeholder="Enter Nickname">
-    <select id="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-    </select>
-    <input type="text" id="interests" placeholder="Your interests (comma separated)">
-    <button id="startBtn">Start Chatting</button>
-</div>
 
-<div id="chatPage" class="page" style="display:none;">
-    <header>
-        <h2>OneChat</h2>
+    <!-- Login Page -->
+    <div id="loginPage">
+        <h2>Welcome to OneChat</h2>
+        <input type="text" id="nickname" placeholder="Enter your nickname">
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" id="interests" placeholder="Enter your interests (optional)">
+        <button id="startBtn">Start Chatting</button>
+    </div>
+
+    <!-- Chat Page -->
+    <div id="chatPage">
+        <div id="status">Waiting for a chat partner...</div>
+        <div id="chatBox"></div>
+        <input type="text" id="messageInput" placeholder="Type a message">
+        <button id="sendBtn">Send</button>
         <button id="skipBtn">Skip</button>
-    </header>
-    <div id="status">Connecting...</div>
-    <div id="chatBox"></div>
-    <input type="text" id="messageInput" placeholder="Type your message...">
-    <button id="sendBtn">Send</button>
-</div>
+    </div>
 
-<script src="script.js"></script>
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
