@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OneChat</title>
+<link rel="stylesheet" href="style.css">
+<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<div id="loginPage" class="page">
+    <h1>OneChat</h1>
+    <input type="text" id="nickname" placeholder="Enter Nickname">
+    <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select>
+    <input type="text" id="interests" placeholder="Your interests (comma separated)">
+    <button id="startBtn">Start Chatting</button>
+</div>
+
+<div id="chatPage" class="page" style="display:none;">
+    <header>
+        <h2>OneChat</h2>
+        <button id="skipBtn">Skip</button>
+    </header>
+    <div id="status">Connecting...</div>
+    <div id="chatBox"></div>
+    <input type="text" id="messageInput" placeholder="Type your message...">
+    <button id="sendBtn">Send</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
