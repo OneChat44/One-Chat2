@@ -3,87 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OneChat Demo</title>
+<title>OneChat</title>
 <style>
   body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f2f2f2; }
   #loginPage, #chatPage { display: none; }
   #loginPage { display: block; }
-  #chatBox { border: 1px solid #ccc; height: 200px; overflow-y: scroll; background: #fff; padding: 10px; margin-bottom: 10px; }
-  input, button { padding: 10px; margin: 5px 0; width: 100%; max-width: 300px; }
+  #chatBox { border: 1px solid #ccc; height: 300px; overflow-y: scroll; background: #fff; padding: 10px; margin-bottom: 10px; }
+  input, select, button { padding: 10px; margin: 5px 0; width: 100%; max-width: 300px; }
   #status { font-weight: bold; margin-bottom: 10px; }
 </style>
 </head>
 <body>
 
-<!-- Login -->
+<!-- Login Page -->
 <div id="loginPage">
-  <h2>OneChat Demo</h2>
-  <input type="text" id="nickname" placeholder="Enter nickname">
+  <h2>Welcome to OneChat</h2>
+  <input type="text" id="nickname" placeholder="Enter your nickname">
+  <select id="gender">
+    <option value="">Select Gender</option>
+    <option value="Male">Male</option>
+    <option value="Female">Female</option>
+    <option value="Other">Other</option>
+  </select>
+  <input type="text" id="interests" placeholder="Enter your interests (optional)">
   <button id="startBtn">Start Chatting</button>
 </div>
 
-<!-- Chat -->
+<!-- Chat Page -->
 <div id="chatPage">
-  <div id="status"></div>
+  <div id="status">Waiting for a chat partner...</div>
   <div id="chatBox"></div>
   <input type="text" id="messageInput" placeholder="Type a message">
   <button id="sendBtn">Send</button>
   <button id="skipBtn">Skip</button>
 </div>
 
-<script>
-let nickname = '';
-let partnerNickname = 'Partner'; // Simulated partner
-
-const loginPage = document.getElementById('loginPage');
-const chatPage = document.getElementById('chatPage');
-const nicknameInput = document.getElementById('nickname');
-const startBtn = document.getElementById('startBtn');
-const chatBox = document.getElementById('chatBox');
-const messageInput = document.getElementById('messageInput');
-const sendBtn = document.getElementById('sendBtn');
-const skipBtn = document.getElementById('skipBtn');
-const statusDiv = document.getElementById('status');
-
-// Start chat
-startBtn.addEventListener('click', () => {
-  nickname = nicknameInput.value.trim() || 'Guest';
-  loginPage.style.display = 'none';
-  chatPage.style.display = 'block';
-  statusDiv.textContent = Connected with ${partnerNickname};
-  appendMessage(${partnerNickname}: Hi ${nickname}!);
-});
-
-// Send message
-sendBtn.addEventListener('click', () => {
-  const msg = messageInput.value.trim();
-  if (!msg) return;
-  appendMessage(${nickname}: ${msg});
-  messageInput.value = '';
-  // Simulate partner response
-  setTimeout(() => {
-    appendMessage(${partnerNickname}: Echo -> ${msg});
-  }, 500);
-});
-
-// Skip partner
-skipBtn.addEventListener('click', () => {
-  chatBox.innerHTML = '';
-  statusDiv.textContent = 'Skipping to a new partner...';
-  setTimeout(() => {
-    statusDiv.textContent = Connected with ${partnerNickname};
-    appendMessage(${partnerNickname}: Hi ${nickname}, I am your new partner!);
-  }, 500);
-});
-
-// Append messages
-function appendMessage(msg) {
-  const p = document.createElement('p');
-  p.textContent = msg;
-  chatBox.appendChild(p);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-</script>
-
+<!-- Socket.IO -->
+<script src="/socket.io/socket.io.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
